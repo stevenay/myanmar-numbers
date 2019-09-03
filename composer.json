@@ -1,0 +1,28 @@
+{
+  "name": "stevenay/myanmar-money-text",
+  "description": "Convert myanmar number to money in formatted text form with currency",
+  "license": "MIT",
+  "keywords": [
+    "myanmar",
+    "currency"
+  ],
+  "homepage": "https://github.com/stevenay/myanmar-money-text",
+  "authors": [
+    {
+      "name": "SteveNay",
+      "email": "stevenaylinaung@gmail.com"
+    }
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "SteveNay\\MyanmarMoneyText\\": "src/"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<span id="words"></span>
+<input id="number" type="text"/>
+
+<script>
+    var a = ['', 'တစ် ', 'နှစ် ', 'သုံး ', 'လေး ', 'ငါး ', 'ခြောက် ', 'ခုနှစ် ', 'ရှစ် ', 'ကိုး ', 'တစ်ဆယ် ', 'ဆယ့်တစ် ', 'ဆယ့်နှစ် ', 'ဆယ့်သုံး ', 'ဆယ့်လေး ', 'ဆယ့်ငါး ', 'ဆယ့်ခြောက် ', 'ဆယ့်ခွန် ', 'ဆယ့်ရှစ် ', 'ဆယ့်ကိုး '];
+
+    function inWords(num) {
+        if ((num = num.toString()).length > 11) return 'overflow';
+        n = ('000000000' + num).substr(-10).match(/^(\d{1})(\d{1})(\d{1})(\d{2})(\d{1})(\d{1})(\d{1})(\d{2})$/);
+
+        console.log(n)
+
+
+        if (!n) return;
+        var upperLakh = '';
+        var lowerLakh = '';
+        upperLakh += (n[1] != 0) ? ((upperLakh != '') ? '၊ ' : '') + 'သိန်း ' + a[n[1][0]] + 'သောင်း ' : '';
+        upperLakh += (n[2] != 0) ? ((upperLakh != '') ? '' : 'သိန်း ') + a[n[2][0]] + 'ထောင် ' : '';
+        upperLakh += (n[3] != 0) ? ((upperLakh != '') ? '' : 'သိန်း ') + a[n[3][0]] + 'ရာ ' : '';
+
+        if ((n[4] != 0)) {
+            if (a[n[4][0]] && !a[n[4][1]]) {
+                upperLakh += ((upperLakh != '') ? '' : 'သိန်း ') + a[n[4][0]] + 'ဆယ် ';
+            } else if (a[n[4][0]] || a[n[4][1]]) {
+                console.log("check" + a[n[4][1]]);
+                upperLakh += ((upperLakh != '') ? '' : ' ') + (a[Number(n[4])] || a[n[4][0]] + 'ဆယ့် ' + a[n[4][1]]) + 'သိန်း ';
+            }
+        }
+
+        lowerLakh += (n[5] != 0) ? ((lowerLakh != '') ? '၊ ' : '') + (a[Number(n[5])]) + 'သောင်း ' : '';
+        lowerLakh += (n[6] != 0) ? ((lowerLakh != '') ? '၊ ' : '') + (a[Number(n[6])]) + 'ထောင် ' : '';
+        lowerLakh += (n[7] != 0) ? ((lowerLakh != '') ? '၊ ' : '') + (a[Number(n[7])]) + 'ရာ ' : '';
+        lowerLakh += (n[8] != 0) ? ((lowerLakh != '') ? '၊ ' : '') + (a[Number(n[8])] || a[n[8][0]] + 'ဆယ် ' + a[n[8][1]])  : '';
+
+        lowerLakh = (upperLakh !== '') ? 'နှင့် ' + lowerLakh : lowerLakh;
+        return upperLakh + lowerLakh + 'ကျပ် ';
+    }
+
+    document.getElementById('number').onkeyup = function () {
+        document.getElementById('words').innerHTML = inWords(document.getElementById('number').value);
+    };
+</script>
+</body>
+</html>
